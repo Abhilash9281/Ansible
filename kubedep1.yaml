@@ -1,0 +1,11 @@
+--- # Kubernetes dependies installation
+- hosts: apacheweb
+  user: abhi
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install ntpd
+      action: yum name=ntp state=installed
+    - name: starting ntp service
+      command: systemctl enable ntpd && systemctl start ntpd && systemctl status ntpd
