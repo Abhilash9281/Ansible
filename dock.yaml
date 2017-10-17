@@ -1,0 +1,19 @@
+--- # My First YAML Playbook for Ansible
+- hosts: apacheweb
+  user: abhi
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install docker
+      action: apt name=docker.io state=installed
+      notify: Restart docker
+    - name: pulling ubuntu image
+      command: docker pull ubuntu
+    - name: pulling nginx image
+      command: docker pull nginx
+    - name: creating container
+      command: docker run -d -p 8080:80 nginx
+  handlers:
+    - name: Restart dockeri
+      action: service name=docker state=restarted
