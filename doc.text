@@ -1,4 +1,4 @@
-s per the requirements, things need to be done:
+As per the requirements, things need to be done:
 •	All the servers or the workstations and nodes should be up and running in AWS ec2 instances.
 •	All those nodes should be ssh to the Ansible workstation where we will be managing all the nodes as required for the project.
 The projects requirements:
