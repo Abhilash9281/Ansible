@@ -1,6 +1,6 @@
 --- # managing by including other yaml files
 
-- hosts: linux
+- hosts: impellenttech1.mylabserver.com 
   user: abhi
   sudo: yes
   connection: ssh
