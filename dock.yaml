@@ -1,5 +1,5 @@
---- # My First YAML Playbook for Ansible
-- hosts: apacheweb
+--- # Playbook to install and run Docker
+- hosts: ubuntu
   user: abhi
   sudo: yes
   connection: ssh
@@ -15,5 +15,5 @@
     - name: creating container
       command: docker run -d -p 8080:80 nginx
   handlers:
-    - name: Restart dockeri
+    - name: Restart docker
       action: service name=docker state=restarted
