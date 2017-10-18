@@ -1,2 +1,8 @@
-- name: Install Docker for RedHat/Centos distribution
+- name: Installing Docker for RedHat/Centos distribution
   yum: pkg=docker state=latest
+- name: Installing ntp for RedHat/Centos distribution
+  yum: pkg=ntp state=latest
+  notify: Restart ntp
+- name: Installing ETCD for RedHat/Centos distribution
+  yum: pkg=etcd state=latest
+  notify: Restart etcd

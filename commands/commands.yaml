@@ -2,5 +2,5 @@
   command: usermod -aG docker abhi
 - name: pulling ubuntu image
   command: docker pull ubuntu
-- nmae: pulling nginx image
+- name: pulling nginx image
   command: docker pull nginx
