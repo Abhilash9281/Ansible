@@ -1,5 +1,5 @@
 --- # My First YAML Playbook for Ansible
-- hosts: apacheweb
+- hosts: linux 
   user: abhi
   sudo: yes
   connection: ssh
@@ -14,6 +14,6 @@
       prompt: Web Domain
   tasks:
     - name: Install Lynx Web Browser
-      action: apt name=lynx state=installed
+      action: yum name=lynx state=installed
     - name: Check for Telnet Clinet
-      action: apt name=telnet state=absent
+      action: yum name=telnet state=absent

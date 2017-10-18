@@ -1,5 +1,5 @@
 --- # Kubernetes dependies installation
-- hosts: apacheweb
+- hosts: impellenttech1.mylabserver.com 
   user: abhi
   sudo: yes
   connection: ssh

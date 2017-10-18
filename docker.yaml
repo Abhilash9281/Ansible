@@ -1,5 +1,5 @@
---- # Playbook to install and run Docker
-- hosts: linux
+--- # My First YAML Playbook for Ansible
+- hosts: ubuntu:linux
   user: abhi
   sudo: yes
   connection: ssh
@@ -8,6 +8,10 @@
   tasks:
     - name: Installing docker in the Distribution (RedHat/CentOS)
       command: yum -y install docker
+      when: ansible_os_family == "RedHat"
+    - name: Installing docker in the Distribution (Debian/Ubuntu)
+      command: apt-get -y install docker
+      when: ansible_os_family == "Debian"
       notify: Restart Docker
     - name: giving docker deamon access
       command: usermod -aG docker abhi
@@ -15,9 +19,6 @@
       command: docker pull ubuntu
     - name: pulling nginx image
       command: docker pull nginx
-    - name: creating container
-      command: docker run -d -p 8080:80 nginx
   handlers:
     - name: Restart Docker
       action: service name=docker state=restarted
-
