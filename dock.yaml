@@ -1,14 +1,20 @@
 --- # Playbook to install and run Docker
-- hosts: linux
+- hosts: ubuntu
   user: abhi
   sudo: yes
   connection: ssh
   vars:
     playbook_version: 0.1B
   tasks:
-    - name: Installing docker in the Distribution (RedHat/CentOS)
-      command: yum -y install docker
-      notify: Restart Docker
+    - name: Installing docker 
+      command: apt-get -y install docker
+    - name: Installing Java
+      command: apt-get -y install default-jdk
+    - name: Install Maven
+      command: apt-get -y install maven
+      name: Install http
+      command: apt-get -y install apache2
+      notify: Restart apache2
     - name: giving docker deamon access
       command: usermod -aG docker abhi
     - name: pulling ubuntu image
@@ -18,6 +24,6 @@
     - name: creating container
       command: docker run -d -p 8080:80 nginx
   handlers:
-    - name: Restart Docker
-      action: service name=docker state=restarted
+    - name: Restart apache2
+      action: service name=apache2 state=restarted
 
