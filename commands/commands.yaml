@@ -1,0 +1,6 @@
+- name: make sure the docker is running by user
+  command: usermod -aG docker abhi
+- name: pulling ubuntu image
+  command: docker pull ubuntu
+- nmae: pulling nginx image
+  command: docker pull nginx

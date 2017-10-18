@@ -1,0 +1,2 @@
+- name: Install Docker for RedHat/Centos distribution
+  yum: pkg=docker state=latest

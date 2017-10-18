@@ -1,0 +1,13 @@
+--- # managing by including other yaml files
+
+- hosts: ubuntu,linux
+  user: abhi
+  sudo: yes
+  connection: ssh
+  tasks:
+  - include: packages/apt.yaml
+    when: ansible_os_family == "Debian"
+  - include: packages/yum.yaml
+    when: ansible_os_family == "Redhat"
+  - include: commands/commands.yaml
+  
