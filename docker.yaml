@@ -6,13 +6,26 @@
   vars:
     playbook_version: 0.1B
   tasks:
-    - name: Installing docker in the Distribution (RedHat/CentOS)
-      command: yum -y install docker
-      when: ansible_os_family == "RedHat"
     - name: Installing docker in the Distribution (Debian/Ubuntu)
-      command: apt-get -y install docker
+      command: apt-get -y install docker.io
+    - name: Installing Java
+      command: apt-get -y install default-jdk
+    - name: Install Maven
+      command: apt-get -y install maven
+      name: Install http
+      command: apt-get -y install apache2
+      notify: Restart apache2
       when: ansible_os_family == "Debian"
-      notify: Restart Docker
+    - name: Installing docker in the Distribution (Centos/Redhat)
+      command: yum -y install docker
+    - name: Installing Java
+      command: yum -y install default-jdk
+    - name: Install lynx
+      command: yum -y install lynx
+      name: Install http
+      command: yum -y install http
+      notify: Restart apache2
+      when: ansible_os_family == "Redhat"
     - name: giving docker deamon access
       command: usermod -aG docker abhi
     - name: pulling ubuntu image
@@ -20,5 +33,9 @@
     - name: pulling nginx image
       command: docker pull nginx
   handlers:
-    - name: Restart Docker
-      action: service name=docker state=restarted
+    - name: Restart apache2
+      action: service name=apache2 state=restarted
+      when: ansible_os_family == "Redhat"
+    - name: Restart httpd
+      action: service name=httpd state=restarted
+      when: ansible_os_family == "Debian"
