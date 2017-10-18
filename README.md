@@ -1,5 +1,6 @@
 # Ansible
-Files to manage automation and get the some things done..
+Files to manage automation and get the things done..
+
 As per the requirements, things need to be done:
 •	All the servers or the workstations and nodes should be up and running in AWS ec2 instances.
 •	All those nodes should be ssh to the Ansible workstation where we will be managing all the nodes as required for the project.
