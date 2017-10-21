@@ -1,0 +1,22 @@
+--- # EC2_AMI Example for creating a basic AMI template from an existing image
+- hosts: localhost
+  connection: local
+  remote_user: abhi
+  become: yes
+  gather_facts: no
+  vars_files:
+  - files/awscred.yaml
+  tasks:
+  - name: Basic Provisioning of AMI from our instances
+    ec2_ami:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: us-east-1
+      instance_id: i-08508a3c6927dda01
+      wait: no
+      name: mynewami
+      tags:
+        Name: MynewAMI
+        Service: TestAMIservice
+    register: instance
+
