@@ -1,6 +1,6 @@
 - name: moving file
   copy:
-    src: /home/abhi/Playbooks/test.text
-    dest: /home/abhi/test1.text
-    owner: abhi
-    group: abhi
+    src: /home/abhi/Playbooks/virt7-docker-common-release.repo
+    dest: /etc/yum.repos.d/virt7-docker-common-release.repo
+    owner: root
+    group: root
