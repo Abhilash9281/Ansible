@@ -1,0 +1,21 @@
+--- # MODULE EC2_SHOT EXAMPLE
+- hosts: localhost
+  connection: local
+  remote_user: abhi
+  become: yes
+  gather_facts: no
+  vars_files:
+  - files/awscred.yaml
+  tasks:
+  - name: Creating snapshot running ec2 instances root volume
+    ec2_snapshot:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: "{{aws_region}}"
+      snapshot_id: snap-0edae64394d3fa462
+      state: absent
+#      instance_id: i-0af47286ac777e2b5
+#      device_name: /dev/xvda
+#      description: Root volume snapshot taken during ansiblecourse
+      wait: no
+    register: snapshot
