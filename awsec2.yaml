@@ -1,3 +1,0 @@
---- #ec2 provisioning
-- hosts: localhost
-  connection:
