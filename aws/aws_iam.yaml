@@ -12,11 +12,12 @@
       aws_access_key: "{{aws_id}}"
       aws_secret_key: "{{aws_key}}"
       region: "{{aws_region}}"
-      iam_type:
-      name: "{{item}}"
+      iam_type: user
+      name: "{{ item }}"
       state: present
 #      state: absent
       password: "password"
+      access_key_state: create
     with_items:
     - tmp1
     - tmp2
