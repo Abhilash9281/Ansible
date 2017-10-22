@@ -1,0 +1,31 @@
+--- # AWS S3 MODULE EXAMPLE
+- hosts: localhost
+  connection: local
+  remote_user: test
+  become: yes
+  gather_facts: no
+  vars_files:
+  - files/awscred.yaml
+  tasks:
+  - name: creating s3 bucket
+    s3:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: "{{aws_region}}"
+      bucket: ansiblebucket1289
+      mode: create
+      permission: public-read-write
+    register: create_bucket
+  - name: Copy the files to the bucket
+    s3:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: "{{aws_region}}"
+      bucket: ansiblebucket1289
+      object: /Playbooks/aws/aws_iam.yaml
+      src: /home/abhi/Playbooks/aws/aws_iam.yaml
+      mode: put
+    register: copy_files
+  - name: output of the creation
+    debug: var=create_bucket
+    debug: var=copy_files
