@@ -1,0 +1,58 @@
+--- # ansible playbook to configure static web server and use it to ctreatea new template
+- hosts: aws
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Install the HTTPD server
+    apt: name=apache2 state=latest force=yes
+  - name: Deploy the static website
+    copy: src=/home/abhi/Playbooks/aws/files/index.html owner=root mode=0655 backup=yes dest=/home/abhi/Playbooks 
+  - name: Restart the HTTPD service
+    service: name=apache2 state=restarted
+#  - name: wait for the http port 80 to be listening
+#    wait_for: host=ec2-107-23-179-151.compute-1.amazonaws.com port=80 delay=5
+  - name: Install WGET to test the site
+    apt: name=wget state=latest force=yes
+  - name: test the site
+    shell: /usr/bin/wget http://localhost
+  - name: display the site output results
+    debug: var=site_result
+
+- hosts: localhost
+  connection: local
+  remote_user: abhi
+  become: yes
+  gather_facts: no
+  vars_files:
+  - /home/abhi/Playbooks/aws/files/awscred.yaml
+  tasks:
+  - name: take a snapshot backup of the website directory
+    ec2_snapshot:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: us-east-1
+      instance_id: i-036bbe55be1fa638b
+      device_name: /dev/sdb
+      description: initial playbook static site deployment Backup
+      wait: no
+    register: snapshot_results
+  - name: display the snapshot results
+    debug: var=snapshot_results
+  - name: create a template ami from our instance
+    ec2_ami:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: us-east-1
+      instance_id: i-036bbe55be1fa638b
+      wait: no
+      name: myansibleamitemplate
+      tags:
+        Name: mynewansibletemplate
+        service: testamitemplate
+    register: ami_results
+  - name: display the ami creation results
+    debug: var=ami_results
+
+    debug: var=snapshot_results
