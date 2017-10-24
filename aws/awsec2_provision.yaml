@@ -11,8 +11,8 @@
     ec2:
       aws_access_key: "{{aws_id}}"
       aws_secret_key: "{{aws_key}}"
-      region: us-east-1
-      image: ami-8c1be5f6
+      region: us-east-2 
+      image: ami-ea87a78f
       instance_type: t2.micro
       count: 2
 

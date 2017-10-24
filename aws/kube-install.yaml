@@ -1,0 +1,5 @@
+--- # INSTALLING KUBEMASTER
+- hosts: kube-control
+  connection: ssh
+  gather_facts: no
+  

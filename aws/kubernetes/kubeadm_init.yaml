@@ -1,0 +1,10 @@
+--- # initiating kubeadm
+- hosts: kube-master
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: running kubeadm
+    command: kubeadm init
+  - include: master.yaml

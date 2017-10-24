@@ -1,0 +1,5 @@
+- name: Up
+  apt: name=kubeadm state=latest force=yes
+- name: down
+  apt: name=kubectl state=latest force=yes
+ 

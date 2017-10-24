@@ -1,0 +1,9 @@
+--- # getting list of nodes
+- hosts: kube-control
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: running kubeadm
+    command: kubectl get nodes

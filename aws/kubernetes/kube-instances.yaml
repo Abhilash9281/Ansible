@@ -1,20 +1,20 @@
---- # MODULE EC2_GROUP EXAMPLE
+--- # EC2 MOSULE PROVISIONING EXAMPLE
 - hosts: localhost
   connection: local
   remote_user: abhi
   become: yes
   gather_facts: no
   vars_files:
-  - files/awscred.yaml
+  - awscred.yaml
   tasks:
   - name: Basic security group creation
     ec2_group:
       aws_access_key: "{{aws_id}}"
       aws_secret_key: "{{aws_key}}"
-      region: "{{aws_region}}"
-      name:  Mytestgroup
+      region: us-east-2
+      name: kubegroup1
       description: This is the ec2-group demo
-      vpc_id: vpc-0bde0c73
+      vpc_id: vpc-84dcebed
       rules:
         - proto: all
           from_port: 0
@@ -25,3 +25,16 @@
           from_port: 0
           to_port: 65535
           cidr_ip: 0.0.0.0/0
+
+  - name: Basic provisioning of two t2.micro instances
+    ec2:
+      aws_access_key: "{{aws_id}}"
+      aws_secret_key: "{{aws_key}}"
+      region: us-east-2
+      image: ami-10547475
+      group: My Security Group
+      keypair: Vangari1993
+      instance_type: t2.micro
+      instance_tags:
+        Name: Kubernetes
+      count: 3

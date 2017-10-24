@@ -1,0 +1,11 @@
+- hosts:  kube-control:kube-nodes
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Install the updates
+
+    command: sudo apt-get -y update
+  - name: install python
+    command: sudo apt-get -y install python

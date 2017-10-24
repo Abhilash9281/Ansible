@@ -1,0 +1,29 @@
+--- # installing kubeadm in all the kubernetes nodes
+
+- hosts: kube-master:kube-slaves
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Install the apt-transport-https
+    apt: name=apt-transport-https state=latest force=yes
+    apt-key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+  - name: Adding List file to the packages
+    copy:
+      src: /home/abhi/Playbooks/kubernetes.list
+      dest: /etc/apt/sources.list.d/kubernetes.list
+  - name: update the systems
+    command: sudo apt-get update
+  - name: Install docker-engine
+    apt: name=docker.io state=latest force=yes
+  - name: installing kubelet
+    apt: name=kubelet state=latest force=yes
+  - name: installing kubeadm
+    apt: name=kubeadm state=latest force=yes
+  - name: installing kubectl
+    apt: name=kubectl state=latest force=yes
+  - name: installing kubernetes-cni
+    apt: name=kubernetes-cni state=latest force=yes
