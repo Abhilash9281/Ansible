@@ -1,0 +1,10 @@
+--- # bootstraping the nodes to master
+- hosts: kube-slaves
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: running kubeadm
+    command: kubeadm join --token 96cd6b.400820e992020001 172.31.31.57:6443 --discovery-token-ca-cert-hash sha256:94b6569431e6b030e67428698e2a95822be6ceeffd93f3f6ef5c27f10daca86e
+

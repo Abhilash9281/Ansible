@@ -1,0 +1,13 @@
+--- # initiating kubeadm
+- hosts: kube-master
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: first command
+    command: sudo cp /etc/kubernetes/admin.conf $HOME/
+  - nmae: second command
+    command: sudo chown $(id -u):$(id -g) $HOME/admin.conf
+  - name: third command 
+    command: export KUBECONFIG=$HOME/admin.conf
