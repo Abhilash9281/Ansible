@@ -1,5 +1,5 @@
 --- # provisioning kubernetes in the ec2 instances
-- hosts: test
+- hosts: Kubernetes_master
   connection: ssh
   remote_user: ubuntu
   become: yes
