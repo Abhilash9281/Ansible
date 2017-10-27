@@ -7,7 +7,7 @@
   - name: Creating Kubernetes Master
     ec2:
       region: us-east-2
-      image: ami-10547475
+      image: ami-9a90bcff
       group: My Security Group
       keypair: Vangari1993
       instance_type: t2.micro
@@ -17,7 +17,7 @@
   - name: Creating Kubernetes Nodes
     ec2:
       region: us-east-2
-      image: ami-10547475
+      image: ami-9a90bcff
       group: My Security Group
       keypair: Vangari1993
       instance_type: t2.micro
