@@ -1,29 +1,36 @@
---- # provison of Kubernetes cluster on AWS infrastructure
-- hosts: localhost
+--- # Provison Of Kubernetes Cluster On AWS Infrastructure
+#---------------------------------------------------------
+- name: Provision Of AWS Infrastructure
+  hosts: localhost
   connection: local
   remote_user: abhi
   become_method: sudo
   gather_facts: no
   tasks:
-  - include: instances.yaml
-  wait_for: 120
+    - include: /home/abhi/Playbooks/Instances.yaml
+    - pause:
+         minutes: 5
+    - include: /home/abhi/Playbooks/update.yaml
+      ignore_errors: yes
 
 # Provisioning Kubernetes Master On AWS Infrastructure
-- hosts: tag_Name_KubernetesMaster
+- name: Provision Of Kubernetes Master On AWS Infrastructure
+  hosts: tag_Name_KubernetesMaster
   connection: ssh
   remote_user: ubuntu
   become: yes
   gather_facts: yes
   roles:
     - Kubernetes_master
-  wait_for: 60
 
-# Provisioning Kubernetes Master On AWS Infrastructure
-- hosts: tag_Name_KubernetesNode
+
+# Provisioning Kubernetes Nodes On AWS Infrastructure
+- name: Provision Of Kubernetes Nodes On AWS Infrastructure
+  hosts: tag_Name_KubernetesNode
   connection: ssh
   remote_user: ubuntu
   become: yes
   gather_facts: yes
   roles:
-    - Kubernetes_node
-  wait_for: 60
+    - Kubernetes_nodes
+

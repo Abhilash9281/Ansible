@@ -1,26 +1,20 @@
-- hosts: localhost
-  connection: local
-  remote_user: abhi
-  become_method: sudo
-  gather_facts: no
-  tasks:
-  - name: Creating Kubernetes Master
-    ec2:
-      region: us-east-2
-      image: ami-9a90bcff
-      group: My Security Group
-      keypair: Vangari1993
-      instance_type: t2.micro
-      instance_tags:
-        Name: KubernetesMaster
-      count: 1
-  - name: Creating Kubernetes Nodes
-    ec2:
-      region: us-east-2
-      image: ami-9a90bcff
-      group: My Security Group
-      keypair: Vangari1993
-      instance_type: t2.micro
-      instance_tags:
-        Name: KubernetesNode
-      count: 3
+- name: Creating Kubernetes Master
+  ec2:
+    region: us-east-2
+    image: ami-6e97bb0b
+    group: My Security Group
+    keypair: Vangari1993
+    instance_type: t2.micro
+    instance_tags:
+       Name: KubernetesMaster
+    count: 1
+- name: Creating Kubernetes Nodes
+  ec2:
+    region: us-east-2
+    image: ami-6e97bb0b
+    group: My Security Group
+    keypair: Vangari1993
+    instance_type: t2.micro
+    instance_tags:
+      Name: KubernetesNode
+    count: 3
