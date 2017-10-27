@@ -8,4 +8,4 @@
 
 - name: Initiating Kubernetes Master
   include: roles/Kubernetes/tasks/kubeadm_init.yaml
-  include: roles/Kubernetes/tasks/master.yaml
+# include: roles/Kubernetes/tasks/master.yaml
