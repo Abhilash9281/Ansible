@@ -7,7 +7,7 @@
   gather_facts: no
   tasks:
   - include: instances.yaml
-    wait_for: 120
+    wait_for: timeout=120
 # Provisioning Kubernetes Master On AWS Infrastructure
 - name: Provision Of Kubernetes Master On AWS Infrastructure
   hosts: tag_Name_KubernetesMaster
