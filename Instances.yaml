@@ -1,9 +1,3 @@
-- hosts: localhost
-  connection: local
-  remote_user: abhi
-  become_method: sudo
-  gather_facts: no
-  tasks:
   - name: Creating Kubernetes Master
     ec2:
       region: us-east-2
