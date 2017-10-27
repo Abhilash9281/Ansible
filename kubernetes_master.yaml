@@ -1,8 +1,0 @@
---- # provisioning kubernetes in the ec2 instances
-- hosts: Kubernetes_master
-  connection: ssh
-  remote_user: ubuntu
-  become: yes
-  gather_facts: yes
-  roles:
-     -  Kubernetes_master
