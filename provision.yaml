@@ -28,4 +28,4 @@
   become: yes
   gather_facts: yes
   roles:
-    - Kubernetes_node
+    - Kubernetes_nodes
