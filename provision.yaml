@@ -1,0 +1,29 @@
+--- # provison of Kubernetes cluster on AWS infrastructure
+- hosts: localhost
+  connection: local
+  remote_user: abhi
+  become_method: sudo
+  gather_facts: no
+  tasks:
+  - include: instances.yaml
+  wait_for: 120
+
+# Provisioning Kubernetes Master On AWS Infrastructure
+- hosts: tag_Name_KubernetesMaster
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  roles:
+    - Kubernetes_master
+  wait_for: 60
+
+# Provisioning Kubernetes Master On AWS Infrastructure
+- hosts: tag_Name_KubernetesNode
+  connection: ssh
+  remote_user: ubuntu
+  become: yes
+  gather_facts: yes
+  roles:
+    - Kubernetes_node
+  wait_for: 60
