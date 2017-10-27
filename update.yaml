@@ -1,0 +1,4 @@
+- name: Getting nodes
+  command: ansible -i /etc/ansible/ec2.py -u ubuntu us-east-2 -m ping
+- name: Getting List Of Nodes
+  command: /etc/ansible/ec2.py --list
