@@ -1,6 +1,6 @@
 --- # Main file gettings tasks together based on systems distribution
 - name: Installing prerequired packages for DEBIAN/UBUNTU distribution
-  include: roles/Kubernetes/tasks/apt_packages.yaml
+  include: roles/Kubernetes_nodes/tasks/apt_packages.yaml
 
 - name: Installing prerequired packages for REDHAT?CENTOS distribution
   import_tasks: yum_packages.yaml

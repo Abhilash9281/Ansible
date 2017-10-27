@@ -1,11 +1,5 @@
 --- # Getting Kubernetes Master Ready By Initiating The Kubeadm To
-- hosts: kube-master
-  connection: ssh
-  remote_user: ubuntu
-  become: yes
-  gather_facts: yes
-  tasks:
-  - name: running kubeadm
-    command: kubeadm init
-  - include: master.yaml
+- name: running kubeadm
+  command: kubeadm init
+
 
