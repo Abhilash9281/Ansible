@@ -1,20 +1,42 @@
+- name: Provision Of AWS Infrastructure
+  hosts: localhost
+  connection: local
+  remote_user: abhi
+  become_method: sudo
+  gather_facts: no
+  tasks:
   - name: Creating Kubernetes Master
     ec2:
       region: us-east-2
-      image: ami-6e97bb0b
+      image: ami-820c23e7
       group: My Security Group
       keypair: Vangari1993
       instance_type: t2.micro
       instance_tags:
-        Name: KubernetesMaster
+         Name: KubernetesMaster
       count: 1
+    register: Master
+  - debug: var=Master
+
   - name: Creating Kubernetes Nodes
     ec2:
       region: us-east-2
-      image: ami-6e97bb0b
+      image: ami-820c23e7
       group: My Security Group
       keypair: Vangari1993
       instance_type: t2.micro
       instance_tags:
         Name: KubernetesNode
-      count: 3
+      count: 1
+    register: Node
+  - debug: var=Node
+  - pause:
+      minutes: 8
+  - name: Listing nodes
+    command: /etc/ansible/ec2.py --list
+    register: LIST
+  - debug: var=LIST
+  - name: Pinging to Clusters
+    command: ansible -i /etc/ansible/ec2.py -u ubuntu us-east-2 -m ping
+    register: PING
+  - debug: var=PING
