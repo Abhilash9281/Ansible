@@ -1,4 +1,6 @@
 --- # Running tasks by the roles
+- name: Updating the System
+  command: sudo apt-get update
 - name: Install the apt-transport-https
   apt: name=apt-transport-https state=latest force=yes
   apt-key:
@@ -10,6 +12,10 @@
     dest: /etc/apt/sources.list.d/kubernetes.list
 - name: update the systems
   command: sudo apt-get update
+- name: Installing HTOP
+  apt: name=htop state=latest force=yes
+- name: Installing TMUX
+  apt: name=tmux state=latest force=yes
 - name: Install docker-engine
   apt: name=docker.io state=latest force=yes
 - name: installing kubelet
