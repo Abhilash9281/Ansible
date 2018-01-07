@@ -1,3 +1,5 @@
+aws_cred.yaml
+token.yaml
 aws/awsec2_provision.yaml
 aws/kubernetes/awscred.yaml
 *.retry
