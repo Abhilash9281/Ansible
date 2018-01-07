@@ -2,9 +2,13 @@
 - name: Installing prerequired packages for DEBIAN/UBUNTU distribution
   include: roles/Kubernetes_master/tasks/apt_packages.yaml
 
+
 - name: Installing prerequired packages for REDHAT?CENTOS distribution
   import_tasks: yum_packages.yaml
   when: ansible_distribution == 'Redhat'
 
 - name: Initiating Kubernetes Master
   include: roles/Kubernetes_master/tasks/kubeadm_init.yaml
+
+- name: Setting Up Master Node
+  include: roles/Kubernetes_master/tasks/master.yaml

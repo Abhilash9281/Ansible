@@ -1,5 +1,5 @@
 --- # Getting Kubernetes Master Ready By Initiating The Kubeadm To
 - name: running kubeadm
   command: kubeadm init
-
-
+  register: result
+- debug: var=result
